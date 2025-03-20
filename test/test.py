@@ -26,7 +26,8 @@ async def test_project(dut):
 
     # Initial State Check (RST)
     await ClockCycles(dut.clk, 5)
-    assert dut.uo_out.value == 8'b01010101, "Initial state after reset is incorrect"
+    assert dut.uo_out.value == 0b01010101, "Initial state after reset is incorrect"
+
 
     # Move to S0: North Green, Others Red
     await ClockCycles(dut.clk, 50_000)  # Wait 5 seconds for S0 to complete
