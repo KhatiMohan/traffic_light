@@ -1,11 +1,11 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
+  title:        "traffic light controller"      # Project title
+  author:       "Mohan"      # Your name
+  discord:      "Mohan@13"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "4 way traffic light controller to control the traffic flow"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     50000      # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -23,34 +23,34 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "RESET_N"       # Active low reset signal
+  ui[1]: "ENA"           # Enable (always 1 when powered)
+  ui[2]: "CLK"           # System clock
+  ui[3]: "TIME_1SEC"     # 1-second pulse input (optional for debugging, tied internally)
+  ui[4]: "TIME_5SEC"     # 5-second pulse input (optional for debugging, tied internally)
+  ui[5]: ""              # Unused
+  ui[6]: ""              # Unused
+  ui[7]: ""              # Unused
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "DIR_N0"        # North Direction Light (LSB)
+  uo[1]: "DIR_N1"        # North Direction Light (MSB)
+  uo[2]: "DIR_E0"        # East Direction Light (LSB)
+  uo[3]: "DIR_E1"        # East Direction Light (MSB)
+  uo[4]: "DIR_S0"        # South Direction Light (LSB)
+  uo[5]: "DIR_S1"        # South Direction Light (MSB)
+  uo[6]: "DIR_W0"        # West Direction Light (LSB)
+  uo[7]: "DIR_W1"        # West Direction Light (MSB)
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: ""             # Unused IO
+  uio[1]: ""             # Unused IO
+  uio[2]: ""             # Unused IO
+  uio[3]: ""             # Unused IO
+  uio[4]: ""             # Unused IO
+  uio[5]: ""             # Unused IO
+  uio[6]: ""             # Unused IO
+  uio[7]: ""             # Unused IO
 
 # Do not change!
 yaml_version: 6
