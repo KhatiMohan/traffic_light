@@ -8,7 +8,7 @@ from cocotb.triggers import ClockCycles
 
 @cocotb.test()
 async def test_project(dut):
-    dut._log.info("Start")
+    dut._log.info("Start Traffic Light Controller Test")
 
     # Set the clock period to 10 us (100 KHz)
     clock = Clock(dut.clk, 10, units="us")
@@ -22,19 +22,43 @@ async def test_project(dut):
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
+    dut._log.info("Reset complete, starting test")
 
-    dut._log.info("Test project behavior")
+    # Initial State Check (RST)
+    await ClockCycles(dut.clk, 5)
+    assert dut.uo_out.value == 8'b01010101, "Initial state after reset is incorrect"
 
-    # Set the input values you want to test
-    dut.ui_in.value = 20
-    dut.uio_in.value = 30
+    # Move to S0: North Green, Others Red
+    await ClockCycles(dut.clk, 50_000)  # Wait 5 seconds for S0 to complete
+    assert dut.uo_out.value == 8'b10000000, "S0: North Green not set correctly"
 
-    # Wait for one clock cycle to see the output values
-    await ClockCycles(dut.clk, 1)
+    # Move to S1: North Yellow, Others Red
+    await ClockCycles(dut.clk, 10_000)  # Wait 1 second for S1 to complete
+    assert dut.uo_out.value == 8'b01000000, "S1: North Yellow not set correctly"
 
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
-    assert dut.uo_out.value == 50
+    # Move to S2: East Green, Others Red
+    await ClockCycles(dut.clk, 50_000)
+    assert dut.uo_out.value == 8'b00100000, "S2: East Green not set correctly"
 
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    # Move to S3: East Yellow, Others Red
+    await ClockCycles(dut.clk, 10_000)
+    assert dut.uo_out.value == 8'b00010000, "S3: East Yellow not set correctly"
+
+    # Move to S4: South Green, Others Red
+    await ClockCycles(dut.clk, 50_000)
+    assert dut.uo_out.value == 8'b00001000, "S4: South Green not set correctly"
+
+    # Move to S5: South Yellow, Others Red
+    await ClockCycles(dut.clk, 10_000)
+    assert dut.uo_out.value == 8'b00000100, "S5: South Yellow not set correctly"
+
+    # Move to S6: West Green, Others Red
+    await ClockCycles(dut.clk, 50_000)
+    assert dut.uo_out.value == 8'b00000010, "S6: West Green not set correctly"
+
+    # Move to S7: West Yellow, Others Red
+    await ClockCycles(dut.clk, 10_000)
+    assert dut.uo_out.value == 8'b00000001, "S7: West Yellow not set correctly"
+
+    dut._log.info("Traffic Light Test Completed Successfully")
+
