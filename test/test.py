@@ -31,35 +31,35 @@ async def test_project(dut):
 
     # Move to S0: North Green, Others Red
     await ClockCycles(dut.clk, 50_000)  # Wait 5 seconds for S0 to complete
-    assert dut.uo_out.value == 0'b10000000, "S0: North Green not set correctly"
+    assert dut.uo_out.value == 0b10000000, "S0: North Green not set correctly"
 
     # Move to S1: North Yellow, Others Red
     await ClockCycles(dut.clk, 10_000)  # Wait 1 second for S1 to complete
-    assert dut.uo_out.value == 0'b01000000, "S1: North Yellow not set correctly"
+    assert dut.uo_out.value == 0b01000000, "S1: North Yellow not set correctly"
 
     # Move to S2: East Green, Others Red
     await ClockCycles(dut.clk, 50_000)
-    assert dut.uo_out.value == 0'b00100000, "S2: East Green not set correctly"
+    assert dut.uo_out.value == 0b00100000, "S2: East Green not set correctly"
 
     # Move to S3: East Yellow, Others Red
     await ClockCycles(dut.clk, 10_000)
-    assert dut.uo_out.value == 0'b00010000, "S3: East Yellow not set correctly"
+    assert dut.uo_out.value == 0b00010000, "S3: East Yellow not set correctly"
 
     # Move to S4: South Green, Others Red
     await ClockCycles(dut.clk, 50_000)
-    assert dut.uo_out.value == 0'b00001000, "S4: South Green not set correctly"
+    assert dut.uo_out.value == 0b00001000, "S4: South Green not set correctly"
 
     # Move to S5: South Yellow, Others Red
     await ClockCycles(dut.clk, 10_000)
-    assert dut.uo_out.value == 0'b00000100, "S5: South Yellow not set correctly"
+    assert dut.uo_out.value == 0b00000100, "S5: South Yellow not set correctly"
 
     # Move to S6: West Green, Others Red
     await ClockCycles(dut.clk, 50_000)
-    assert dut.uo_out.value == 0'b00000010, "S6: West Green not set correctly"
+    assert dut.uo_out.value == 0b00000010, "S6: West Green not set correctly"
 
     # Move to S7: West Yellow, Others Red
     await ClockCycles(dut.clk, 10_000)
-    assert dut.uo_out.value == 0'b00000001, "S7: West Yellow not set correctly"
+    assert dut.uo_out.value == 0b00000001, "S7: West Yellow not set correctly"
 
     dut._log.info("Traffic Light Test Completed Successfully")
 
